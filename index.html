@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<ul>
+		<li>X-axis (&beta;): <span id="Orientation_b">0</span><span>&deg;</span></li>
+		<li>Y-axis (&gamma;): <span id="Orientation_g">0</span><span>&deg;</span></li>
+		<li>Z-axis (&alpha;): <span id="Orientation_a">0</span><span>&deg;</span></li>
+	</ul>
+
+	<button id="start_demo">Start Demo</button>
+
+	<script type="text/javascript">
+		let demo_button = document.getElementById("start_demo");
+
+		function updateFieldIfNotNull(fieldName, value, precision=10){
+			if (value != null)
+				document.getElementById(fieldName).innerHTML = value.toFixed(precision);
+		}
+
+		function handleOrientation(event) {
+			updateFieldIfNotNull('Orientation_a', event.alpha);
+			updateFieldIfNotNull('Orientation_b', event.beta);
+			updateFieldIfNotNull('Orientation_g', event.gamma);
+		}
+
+		demo_button.onclick = function(e) {
+			e.preventDefault();
+			window.addEventListener("deviceorientation", handleOrientation);
+		}
+	</script>
+</body>
+</html>
